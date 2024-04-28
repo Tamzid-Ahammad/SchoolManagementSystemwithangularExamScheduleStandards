@@ -1,0 +1,53 @@
+
+<a routerLink="/examSchedule/create" class="btn btn-info">Create New ExamSchedule</a>
+<button class="btn btn-primary" (click)="LoadData()">Refresh</button>
+<hr />
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>ExamScheduleId</th>
+            <th>ExamScheduleName</th>
+            <th>ExamScheduleStandard</th>
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let exs of examSchedules">
+            <td>{{exs.examScheduleId}}</td>
+            <td>{{exs.examScheduleName}}</td>
+
+            <td>
+                <table>
+                    <tr>
+                        <th>StandardName</th>
+                        <th>ExamSubject</th>
+
+                    </tr>
+                    <tr *ngFor="let examSchedulestandard of exs.examScheduleStandards">
+                        <td>{{examSchedulestandard.standard.standardName}}</td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <th></th>
+                                </tr>
+                                <tr *ngFor="let examsubject of examSchedulestandard.examSubjects">
+                                    <td>{{examsubject.examType.examTypeName}}</td>
+                                    <td>{{examsubject.subject.subjectName|uppercase}}</td>
+                                    <td>{{examsubject.subject.subjectCode}}</td>
+                                    <td>{{examsubject.examDate}}</td>
+                                    <td>{{examsubject.examStartTime}}</td>
+                                    <td>{{examsubject.examEndTime}}</td>
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+            <td class="btn-group">
+                <a [routerLink]="['/examSchedule/edit/', exs.examScheduleId]" class="btn btn-warning">Edit</a>
+                <button class="btn btn-danger" (click)="DeleteExamSchedule(exs)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
